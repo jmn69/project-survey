@@ -1,6 +1,6 @@
 import React from 'react';
 import { IndexLink, Link } from 'react-router';
-import { Grid, Row, Col } from 'react-flexbox-grid/lib/index';
+import {Grid, Col, Row} from 'react-styled-flexboxgrid';
 import MediaQuery from 'react-responsive';
 
 const styles = {
@@ -15,7 +15,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <Grid fluid>
+      <Grid>
 
         {/* -------------- Smartphone et tablette ---------------- */}
 
