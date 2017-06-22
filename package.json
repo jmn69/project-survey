@@ -8,7 +8,7 @@
     "watch": "webpack -d --config config/webpack.dev.js --watch --color",
     "prod": "webpack -p --config config/webpack.prod.js --color",
     "start": "node server.js",
-    "test": "jest --no-cache && codecov --token=:60fa7fc7-a1c4-4bd2-8f67-da4b083e399e"
+    "test": "jest --no-cache && codecov --token=60fa7fc7-a1c4-4bd2-8f67-da4b083e399e"
   },
   "jest": {
     "coverageDirectory": "./coverage/",
