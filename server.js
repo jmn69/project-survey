@@ -1,5 +1,6 @@
 var path = require('path');
 var express = require('express');
+var conf = require('./config');
 
 var app = express();
 var port = process.env.PORT || 3000;
