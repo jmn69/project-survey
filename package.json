@@ -8,7 +8,8 @@
     "watch": "webpack -d --config config/webpack.dev.js --watch --color",
     "prod": "webpack -p --config config/webpack.prod.js --color",
     "start": "node server.js",
-    "test": "jest && codecov"
+    "test": "jest && codecov",
+    "heroku-postbuild": "webpack -p --config config/webpack.prod.js --progress"
   },
   "jest": {
     "coverageDirectory": "./coverage/",
