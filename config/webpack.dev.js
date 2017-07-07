@@ -1,10 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
-var APP_DIR = path.join(__dirname, '..', 'app');
+var APP_DIR = path.join(__dirname, '..', 'client');
 
 module.exports = {
     entry: {
-        index: ['react-hot-loader/patch', 'webpack-hot-middleware/client', './app/main.jsx']
+        index: ['react-hot-loader/patch', 'webpack-hot-middleware/client', './client/main.jsx']
     },
     output: {
         path: path.join(__dirname, '..', 'public'),
