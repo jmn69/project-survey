@@ -10,7 +10,7 @@ import Root from './Root.jsx';
 import routes from './routes.js';
 import rootReducer from './rootReducer';
 
-const initialState = { auth: { loggedIn: false, currentURL: "" } };
+const initialState = { auth: { loggedIn: false, currentURL: "", isFetching: false } };
 const loggerMiddleware = createLogger();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, initialState, composeEnhancers(

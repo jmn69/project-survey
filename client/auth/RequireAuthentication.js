@@ -1,20 +1,31 @@
 import React, { Component, PropTypes } from 'react';
 import * as redux from 'redux'
 import { connect } from 'react-redux';
-import { setRedirectUrl } from './actions.js'
+import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
+import { authenticate, setRedirectUrl } from './actions.js';
 
 export default (ChildComponent) => {
   class AuthenticatedComponent extends Component {
 
     componentDidMount() {
-      const { dispatch, currentURL } = this.props
+      const { currentURL } = this.props
+      this.props.authenticate().then(data => {
+        if (!this.props.isLoggedIn) {
+          this.props.setRedirectUrl(currentURL);
+          browserHistory.replace("/signin")
+        }
+      });
+    }
 
-      if (!this.props.isLoggedIn) {
-        dispatch(setRedirectUrl(currentURL))
-        console.log(currentURL);
-        browserHistory.replace("/signin")
-      }
+    componentDidUpdate() {
+      const { currentURL } = this.props
+      this.props.authenticate().then(data => {
+        if (!this.props.isLoggedIn) {
+          this.props.setRedirectUrl(currentURL);
+          browserHistory.replace("/signin")
+        }
+      });
     }
 
     render() {
@@ -26,12 +37,19 @@ export default (ChildComponent) => {
     }
   }
 
-  function mapStateToProps(state, ownProps) {
+  const mapStateToProps = (state, ownProps) => {
     return {
       isLoggedIn: state.auth.loggedIn,
       currentURL: ownProps.location.pathname
     }
   }
 
-  return connect(mapStateToProps)(AuthenticatedComponent)
+  const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+      authenticate: authenticate,
+      setRedirectUrl: setRedirectUrl
+    }, dispatch);
+  }
+
+  return connect(mapStateToProps, mapDispatchToProps)(AuthenticatedComponent)
 }

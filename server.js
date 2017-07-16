@@ -58,17 +58,12 @@ else {
   app.use(require('webpack-hot-middleware')(compiler));
 }
 
-app.post("/login", users.login);
+app.post("/authentication", users.authentication);
 
 app.get('/authenticate', users.authenticate);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-app.get('/test', (req, res) => {
-  var test = req.isAuthenticated();
-  res.json({ok: "ok"});
 });
 
 app.listen(port, err => {

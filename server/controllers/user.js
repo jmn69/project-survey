@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var passport = require('passport');
 
-exports.login = function (req, res, next) {
+exports.authentication = function (req, res, next) {
 	passport.authenticate("local-login", function (err, user, info) {
 
 		if (err) return next(err)

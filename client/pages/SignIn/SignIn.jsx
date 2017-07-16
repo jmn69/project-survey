@@ -1,5 +1,5 @@
 import React from 'react';
-import { login } from '../../auth/actions.js';
+import { authentication } from '../../auth/actions.js';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
@@ -45,22 +45,21 @@ class SignIn extends React.Component {
             password: this.state.password
         };
 
-        var data = new FormData();
-        data.append("json", JSON.stringify(payload));
+        this.props.authentication(payload);
 
-        fetch("/login",
-            {
-                method: "POST",
-                credentials: "include",
-                body: JSON.stringify(payload),
-                headers: { 'content-type': 'application/json' },
-            })
-            .then(res => { return res.json(); })
-            .then(data => {
-                const {currentURL} = this.props;
-                this.setState({ loginMessage: data.message });
-                this.props.login();
-            })
+        // fetch("/authentication",
+        //     {
+        //         method: "POST",
+        //         credentials: "include",
+        //         body: JSON.stringify(payload),
+        //         headers: { 'content-type': 'application/json' },
+        //     })
+        //     .then(res => { return res.json(); })
+        //     .then(data => {
+        //         const {currentURL} = this.props;
+        //         this.setState({ loginMessage: data.message });
+        //         this.props.login();
+        //     })
     }
 
     render() {
@@ -82,7 +81,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ login: login }, dispatch);
+    return bindActionCreators({ authentication: authentication }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

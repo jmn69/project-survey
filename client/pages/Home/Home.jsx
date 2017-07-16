@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Row } from 'react-styled-flexboxgrid';
 import MediaQuery from 'react-responsive';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
 
 const styles = {
 
