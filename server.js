@@ -28,6 +28,7 @@ app.use(session({
   secret: conf.session_secret,
   resave: true,
   saveUninitialized: true,
+  rolling: true,
   store: new MongoStore({ mongooseConnection: connexion }),
   cookie: { maxAge: 60000, secure: false }
 }));
