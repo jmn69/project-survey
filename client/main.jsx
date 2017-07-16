@@ -2,17 +2,20 @@ import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import thunkMiddleware from 'redux-thunk';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { createLogger } from 'redux-logger';
 
 import Root from './Root.jsx';
 import routes from './routes.js';
-import rootReducer from './reducer';
+import rootReducer from './rootReducer';
 
-const initialState = {app: {loggedIn: true, currentURL: ""}};
+const initialState = { auth: { loggedIn: false, currentURL: "" } };
 const loggerMiddleware = createLogger();
-const store = createStore(rootReducer, initialState, applyMiddleware(thunkMiddleware, loggerMiddleware));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(rootReducer, initialState, composeEnhancers(
+    applyMiddleware(thunkMiddleware, loggerMiddleware)
+));
 
 const renderApp = appRoutes => {
     render(
@@ -33,8 +36,8 @@ if (module.hot) {
         renderApp(newRoutes);
     });
 
-    module.hot.accept('./reducer', () => {
-        const nextReducer = require('./reducer').default;
+    module.hot.accept('./rootReducer', () => {
+        const nextReducer = require('./rootReducer').default;
         store.replaceReducer(nextReducer);
     });
 }

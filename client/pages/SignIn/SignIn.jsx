@@ -1,6 +1,8 @@
 import React from 'react';
-import { Col, Row } from 'react-styled-flexboxgrid';
-import MediaQuery from 'react-responsive';
+import { login } from '../../auth/actions.js';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { browserHistory } from 'react-router';
 
 const styles = {
     loginMessageStyle: {
@@ -8,7 +10,7 @@ const styles = {
     }
 }
 
-export default class SignIn extends React.Component {
+class SignIn extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -49,11 +51,16 @@ export default class SignIn extends React.Component {
         fetch("/login",
             {
                 method: "POST",
+                credentials: "include",
                 body: JSON.stringify(payload),
                 headers: { 'content-type': 'application/json' },
             })
-            .then(function (res) { return res.json(); })
-            .then(function (data) { alert(JSON.stringify(data)) })
+            .then(res => { return res.json(); })
+            .then(data => {
+                const {currentURL} = this.props;
+                this.setState({ loginMessage: data.message });
+                this.props.login();
+            })
     }
 
     render() {
@@ -63,9 +70,19 @@ export default class SignIn extends React.Component {
                 <form onSubmit={this.onLoginSubmit}>
                     <input type="email" onChange={this.onEmailChange} placeholder="Email" /><br />
                     <input onChange={this.onPasswordChange} type="password" placeholder="Password" /><br />
-                    <input type="submit" value="Login" /> <span style={styles.loginMessageStyle}>Go</span>
+                    <input type="submit" value="Login" /> <span style={styles.loginMessageStyle}>{this.state.loginMessage}</span>
                 </form>
             </div>
         );
     }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return { currentURL: state.auth.currentURL }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ login: login }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

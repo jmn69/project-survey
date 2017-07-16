@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import SignIn from './pages/SignIn';
 import SurveyList from './pages/SurveyList';
-import RequireAuthentication from './RequireAuthentication.js';
+import RequireAuthentication from './auth/RequireAuthentication.js';
 
 const routes = () => {
     return (
@@ -15,7 +15,7 @@ const routes = () => {
             <Route path="signin" component={SignIn} />
             <Route path="admin" component={RequireAuthentication(Dashboard)} >
                 <Route path="surveylist" component={SurveyList} />
-            </Route> 
+            </Route>
         </Route>
     );
 };

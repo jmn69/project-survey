@@ -5,28 +5,36 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 var morgan = require('morgan');
-var bodyParser = require( 'body-parser' );
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 
 var users = require('./server/controllers/user');
 
 var app = express();
 var port = process.env.PORT || 3000;
 
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-console.log(conf.connexionString);
-mongoose.createConnection(conf.connexionString);
+var connexion = mongoose.createConnection(conf.connexionString);
 
-require('./config/passport')(passport); // pass passport for configuration
-
-app.use(morgan('dev')); // log every request to the console
+app.use(morgan('dev'));
 
 // required for passport
-app.use(session({ secret: conf.session_secret })); // session secret
+app.use(session({ 
+  secret: conf.session_secret,
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore({ mongooseConnection: connexion }),
+  cookie: { maxAge: 60000, secure: false }
+}));
+
+require('./config/passport')(passport);
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
+app.use(passport.session());
 
 if (process.env.NODE_ENV === 'production') {
   const publicPath = express.static(path.join(__dirname, 'public'))
@@ -40,16 +48,26 @@ else {
 
   app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
     publicPath: config.output.publicPath
   }));
 
   app.use(require('webpack-hot-middleware')(compiler));
 }
 
-app.post("/login", users.login)
+app.post("/login", users.login);
+
+app.get('/authenticate', users.authenticate);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get('/test', (req, res) => {
+  var test = req.isAuthenticated();
+  res.json({ok: "ok"});
 });
 
 app.listen(port, err => {
