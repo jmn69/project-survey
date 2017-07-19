@@ -44,6 +44,8 @@
     "flexboxgrid": "^6.3.1",
     "image-webpack-loader": "^3.3.1",
     "jest": "^20.0.4",
+    "material-ui": "^1.0.0-alpha.21",
+    "material-ui-icons": "^1.0.0-alpha.19",
     "moment": "^2.18.1",
     "mongoose": "^4.10.8",
     "morgan": "^1.8.2",

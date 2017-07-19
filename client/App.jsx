@@ -1,7 +1,7 @@
 import React from 'react';
-import { IndexLink, Link, browserHistory } from 'react-router';
-import { connect } from 'react-redux';
-import { Grid, Col, Row } from 'react-styled-flexboxgrid';
+import {IndexLink, Link, browserHistory} from 'react-router';
+import {connect} from 'react-redux';
+import {Grid, Col, Row} from 'react-styled-flexboxgrid';
 import MediaQuery from 'react-responsive';
 
 const styles = {
@@ -17,7 +17,7 @@ class App extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (!this.props.loggedIn && nextProps.loggedIn) {
       console.log("login");
-      const { currentURL } = this.props;
+      const {currentURL} = this.props;
       if (currentURL)
         browserHistory.push(currentURL);
       else
@@ -29,7 +29,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Grid>
+      <div>
 
         {/* -------------- Smartphone et tablette ---------------- */}
 
@@ -42,19 +42,17 @@ class App extends React.Component {
         <MediaQuery query='(min-width : 1024px)'>
 
         </MediaQuery>
-
-        <Row>
-          <p></p>
-          <Col md={12} id="pageChildren">
-            {this.props.children}
-          </Col>
-        </Row>
-      </Grid>);
+        {this.props.children}
+      </div>
+    );
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { loggedIn: state.auth.loggedIn }
+  return {
+    loggedIn: state.auth.loggedIn,
+    currentURL: state.auth.currentURL
+  }
 }
 
 export default connect(mapStateToProps)(App)

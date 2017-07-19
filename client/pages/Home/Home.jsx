@@ -1,13 +1,8 @@
 import React from 'react';
-import { Col, Row } from 'react-styled-flexboxgrid';
-import MediaQuery from 'react-responsive';
-import { Link } from 'react-router';
-
-const styles = {
-
-}
-
-
+import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
+import {Link} from 'react-router';
+import Grid from 'material-ui/Grid';
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -17,10 +12,20 @@ export default class Home extends React.Component {
 
     render() {
         return (
-            <div>
-                <Link to="/admin">Admin</Link>
-                <br/>
-                hello world
-            </div>);
+            <Grid
+                container
+                align="center"
+                direction="row"
+                justify="center"
+            >
+                <Grid item xs={10} sm={8}>
+                    <Paper>
+                        <Typography type="headline" gutterBottom>
+                            Bienvenue !
+                        </Typography>
+                        <Link to="/admin">Admin</Link>
+                    </Paper>
+                </Grid>
+            </Grid>);
     }
 }
