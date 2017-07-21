@@ -3,7 +3,6 @@ var express = require('express');
 var conf = require('./config');
 var mongoose = require('mongoose');
 var passport = require('passport');
-var flash = require('connect-flash');
 var session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 var morgan = require('morgan');

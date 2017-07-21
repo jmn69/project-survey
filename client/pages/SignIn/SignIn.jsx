@@ -1,21 +1,29 @@
 import React from 'react';
-import {authentication} from '../../auth/actions.js';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {browserHistory} from 'react-router';
+import { authentication } from '../../auth/actions.js';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { browserHistory } from 'react-router';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
-import {createStyleSheet} from 'material-ui/styles';
-import {withStyles} from 'material-ui/styles';
-import {blue} from 'material-ui/colors';
+import { createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
+import { blue } from 'material-ui/colors';
+
 
 const styleSheet = createStyleSheet('Home', (theme) => ({
     root: {
-        backgroundColor: blue[700],
-        minHeight: "100vh"
+        backgroundColor: blue[500],
+        minHeight: "100vh",
+    },
+    title: {
+        textAlign: "center"
+    },
+    paper: {
+        padding: "2rem",
+        borderRadius: "4px"
     }
 }));
 
@@ -34,16 +42,16 @@ class SignIn extends React.Component {
 
     //Todo remove
     componentDidMount() {
-        this.setState({email: "jmichon69@gmail.com", password: "test"});
+        this.setState({ email: "jmichon69@gmail.com", password: "test" });
     }
 
     onEmailChange(ev) {
-        this.setState({email: ev.target.value});
+        this.setState({ email: ev.target.value });
     }
 
 
     onPasswordChange(ev) {
-        this.setState({password: ev.target.value});
+        this.setState({ password: ev.target.value });
     }
 
     onLoginSubmit(event) {
@@ -68,8 +76,8 @@ class SignIn extends React.Component {
                 justify="center"
                 className={classes.root}
             >
-                <Grid item xs={7} sm={5}>
-                    <Paper>
+                <Grid item xs={4} sm={4}>
+                    <Paper className={classes.paper}>
                         <Grid
                             container
                             align="center"
@@ -77,16 +85,15 @@ class SignIn extends React.Component {
                             justify="center"
                             gutter={24}
                         >
-                            <Grid item xs={3} sm={3}>
+                            <Grid item xs={12} sm={12} className={classes.title}>
                                 <Typography type="display1" gutterBottom>
-                                    Sign in
+                                    Administration area
                                 </Typography>
                             </Grid>
                             <Grid item xs={10} sm={10}>
                                 <TextField
                                     id="email"
                                     label="Email"
-                                    marginForm
                                     fullWidth
                                     onChange={this.onEmailChange}
                                 />
@@ -95,17 +102,26 @@ class SignIn extends React.Component {
                                 <TextField
                                     id="password"
                                     label="Password"
-                                    marginForm
                                     fullWidth
                                     type="password"
                                     autoComplete="current-password"
                                     onChange={this.onPasswordChange}
                                 />
                             </Grid>
-                            <Grid item xs={3} sm={3}>
-                                <Button onClick={this.onLoginSubmit} raised color="primary">
-                                    Connexion
-                                </Button>
+                            <Grid item xs={12} sm={12}>
+                                <Grid
+                                    container
+                                    align="center"
+                                    direction="row"
+                                    justify="center"
+                                    gutter={24}
+                                >
+                                    <Grid item xs={3} sm={3}>
+                                        <Button onClick={this.onLoginSubmit} raised color="accent">
+                                            Connexion
+                                        </Button>
+                                    </Grid>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </Paper>
@@ -116,11 +132,11 @@ class SignIn extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return {currentURL: state.auth.currentURL}
+    return { currentURL: state.auth.currentURL }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({authentication: authentication}, dispatch);
+    return bindActionCreators({ authentication: authentication }, dispatch);
 }
 
 export default withStyles(styleSheet)(connect(mapStateToProps, mapDispatchToProps)(SignIn))

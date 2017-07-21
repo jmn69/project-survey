@@ -1,7 +1,6 @@
 import React from 'react';
 import {IndexLink, Link, browserHistory} from 'react-router';
 import {connect} from 'react-redux';
-import {Grid, Col, Row} from 'react-styled-flexboxgrid';
 import MediaQuery from 'react-responsive';
 
 const styles = {

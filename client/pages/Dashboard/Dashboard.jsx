@@ -1,11 +1,7 @@
 import React from 'react';
-import { Col, Row } from 'react-styled-flexboxgrid';
 import MediaQuery from 'react-responsive';
 import { Link } from 'react-router';
-
-const styles = {
-
-}
+import Typography from 'material-ui/Typography';
 
 export default class Dashboard extends React.Component {
     constructor(props) {
@@ -16,7 +12,9 @@ export default class Dashboard extends React.Component {
     render() {
         return (
             <div>
+                <Typography type="body1">
                 Dashboard
+                </Typography>
                 <br />
                 <Link to="/admin/surveylist">surveys</Link>
                 {this.props.children}
