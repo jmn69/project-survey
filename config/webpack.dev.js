@@ -12,38 +12,62 @@ module.exports = {
         publicPath: '/public/'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.css$/,
-                loader: 'style!css?modules',
-                include: [/flexboxgrid/, APP_DIR],
+                use: [
+                    {
+                        loader: "style-loader"
+                    },
+                    {
+                        loader: "css-loader",
+                        options: {
+                            modules: true
+                        }
+                    }
+                ],
+                include: [/flexboxgrid/, APP_DIR]
             },
             {
                 test: /\.(js|jsx)$/,
-                loaders: ['babel'],
+                use: [
+                    {
+                        loader: "babel-loader"
+                    }
+                ],
                 include: APP_DIR
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
-                loaders: [
-                    'file?hash=sha512&digest=hex&name=[hash].[ext]',
-                    'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
-                ]
+                use: [
+                    {
+                        loader: 'file-loader?hash=sha512&digest=hex&name=[hash].[ext]'
+                    },
+                    {
+                        loader: 'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+                    }
+                ],
+                include: APP_DIR
             },
-            { test: /\.(eot|woff)$/, loader: "file-loader" }
+            {
+                test: /\.(eot|woff)$/,
+                use: [
+                    {
+                        loader: "file-loader"
+                    }
+                ],
+            }
         ]
     },
-    resolveLoader: { root: path.join(__dirname, "node_modules") },
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        modules: ["node_modules"],
+        extensions: ['.js', '.jsx']
     },
-    debug: true,
     devtool: 'eval-source-map',
     plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /fr/),
-        new webpack.NoErrorsPlugin(),
         new webpack.DefinePlugin({
             'process.env': {
                 'NODE_ENV': JSON.stringify('development')
