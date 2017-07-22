@@ -8,14 +8,12 @@ import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
-import { createStyleSheet } from 'material-ui/styles';
-import { withStyles } from 'material-ui/styles';
-import { blue } from 'material-ui/colors';
+import { createStyleSheet, withStyles } from 'material-ui/styles';
 
 
-const styleSheet = createStyleSheet('Home', (theme) => ({
+const styleSheet = createStyleSheet('Signin', (theme) => ({
     root: {
-        backgroundColor: blue[500],
+        backgroundColor: theme.palette.primary[500],
         minHeight: "100vh",
     },
     title: {
@@ -86,7 +84,7 @@ class SignIn extends React.Component {
                             gutter={24}
                         >
                             <Grid item xs={12} sm={12} className={classes.title}>
-                                <Typography type="display1" gutterBottom>
+                                <Typography type="headline" gutterBottom>
                                     Administration area
                                 </Typography>
                             </Grid>
@@ -96,6 +94,7 @@ class SignIn extends React.Component {
                                     label="Email"
                                     fullWidth
                                     onChange={this.onEmailChange}
+                                    value={this.state.email}
                                 />
                             </Grid>
                             <Grid item xs={10} sm={10}>
@@ -106,6 +105,7 @@ class SignIn extends React.Component {
                                     type="password"
                                     autoComplete="current-password"
                                     onChange={this.onPasswordChange}
+                                     value={this.state.password}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12}>

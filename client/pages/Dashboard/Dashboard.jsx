@@ -15,9 +15,6 @@ export default class Dashboard extends React.Component {
                 <Typography type="body1">
                 Dashboard
                 </Typography>
-                <br />
-                <Link to="/admin/surveylist">surveys</Link>
-                {this.props.children}
             </div>);
     }
 }

@@ -29,7 +29,7 @@ app.use(session({
   saveUninitialized: true,
   rolling: true,
   store: new MongoStore({ mongooseConnection: connexion }),
-  cookie: { maxAge: 60000, secure: false }
+  cookie: { maxAge: 360000, secure: false }
 }));
 
 require('./config/passport')(passport);
