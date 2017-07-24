@@ -28,7 +28,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Route exact path="/" component={RequireAuthentication(AdminArea)} />
+        <Route path="/" component={RequireAuthentication(AdminArea)} />
         <Route path="/signin" component={SignIn} />
       </div>
     );

@@ -10,10 +10,11 @@ import ListIcon from 'material-ui-icons/List';
 import SettingsIcon from 'material-ui-icons/Settings';
 import Paper from 'material-ui/Paper';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import { Route } from 'react-router-dom';
+import { Route, withRouter, Switch, Link } from 'react-router-dom';
 
 import Dashboard from '../Dashboard';
 import SurveyList from '../SurveyList';
+import Settings from '../Settings';
 
 const styleSheet = createStyleSheet('AdminArea', (theme) => ({
     root: {
@@ -58,7 +59,7 @@ class AdminArea extends React.Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, history } = this.props;
 
         return (
             <Grid
@@ -93,7 +94,11 @@ class AdminArea extends React.Component {
                         <Grid item xs={12} sm={12}>
                             <Paper>
                                 <List className={classes.menuItem} disablePadding>
-                                    <ListItem button divider>
+                                    <ListItem
+                                        button
+                                        divider
+                                        onClick={() => { history.push("/") }}
+                                    >
                                         <ListItemIcon className={classes.menuIcon}>
                                             <DashboardIcon />
                                         </ListItemIcon>
@@ -101,7 +106,11 @@ class AdminArea extends React.Component {
                                             disableTypography
                                             primary="Dashboard" />
                                     </ListItem>
-                                    <ListItem button divider>
+                                    <ListItem
+                                        button
+                                        divider
+                                        onClick={() => { history.push("/surveylist") }}
+                                    >
                                         <ListItemIcon className={classes.menuIcon}>
                                             <ListIcon />
                                         </ListItemIcon>
@@ -109,7 +118,10 @@ class AdminArea extends React.Component {
                                             disableTypography
                                             primary="Surveys" />
                                     </ListItem>
-                                    <ListItem button>
+                                    <ListItem
+                                        button
+                                        onClick={() => { history.push("/settings") }}
+                                    >
                                         <ListItemIcon className={classes.menuIcon}>
                                             <SettingsIcon />
                                         </ListItemIcon>
@@ -119,18 +131,19 @@ class AdminArea extends React.Component {
                                     </ListItem>
                                 </List>
                             </Paper>
-                            {/* <Link to="/">dashboard</Link>
-                            <Link to="/surveylist">surveys</Link>
-                            containerElement={<Link to="/foo" />} */}
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid item xs={10} sm={10}>
-                    <Route exact path="/" component={Dashboard} />
-                    <Route path="/surveylist" component={SurveyList} />
+                    <Switch>
+                        <Route exact path="/" component={Dashboard} />
+                        <Route path="/surveylist" component={SurveyList} />
+                        <Route path="/settings" component={Settings} />
+                    </Switch>
                 </Grid>
             </Grid>);
     }
+
 }
 
-export default withStyles(styleSheet)(AdminArea);
+export default withStyles(styleSheet)(withRouter(AdminArea));

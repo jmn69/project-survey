@@ -4,7 +4,7 @@ var APP_DIR = path.join(__dirname, '..', 'app');
 
 module.exports = {
     entry: {
-        index: ['./app/main.jsx']
+        index: ['./app/index.jsx']
     },
     output: {
         path: path.join(__dirname, '..', 'public'),

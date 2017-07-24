@@ -4,7 +4,7 @@ var APP_DIR = path.join(__dirname, '..', 'client');
 
 module.exports = {
     entry: {
-        index: ['react-hot-loader/patch', 'webpack-hot-middleware/client', './client/main.jsx']
+        index: ['react-hot-loader/patch', 'webpack-hot-middleware/client', './client/index.jsx']
     },
     output: {
         path: path.join(__dirname, '..', 'public'),
