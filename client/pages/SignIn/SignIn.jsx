@@ -1,8 +1,7 @@
 import React from 'react';
-import { authentication } from '../../auth/actions.js';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import { browserHistory } from 'react-router';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
@@ -10,6 +9,7 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { createStyleSheet, withStyles } from 'material-ui/styles';
 
+import { authentication } from '../../auth/actions.js';
 
 const styleSheet = createStyleSheet('Signin', (theme) => ({
     root: {
@@ -139,4 +139,4 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({ authentication: authentication }, dispatch);
 }
 
-export default withStyles(styleSheet)(connect(mapStateToProps, mapDispatchToProps)(SignIn))
+export default withStyles(styleSheet)(withRouter(connect(mapStateToProps, mapDispatchToProps)(SignIn)))

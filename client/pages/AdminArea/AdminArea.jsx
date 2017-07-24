@@ -1,6 +1,5 @@
 import React from 'react';
 import MediaQuery from 'react-responsive';
-import { Link } from 'react-router';
 import Typography from 'material-ui/Typography';
 import { withTheme } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
@@ -8,7 +7,13 @@ import { createStyleSheet, withStyles } from 'material-ui/styles';
 import grey from 'material-ui/colors/grey';
 import DashboardIcon from 'material-ui-icons/Dashboard';
 import ListIcon from 'material-ui-icons/List';
+import SettingsIcon from 'material-ui-icons/Settings';
+import Paper from 'material-ui/Paper';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import { Route } from 'react-router-dom';
+
+import Dashboard from '../Dashboard';
+import SurveyList from '../SurveyList';
 
 const styleSheet = createStyleSheet('AdminArea', (theme) => ({
     root: {
@@ -38,7 +43,6 @@ const styleSheet = createStyleSheet('AdminArea', (theme) => ({
         color: theme.palette.accent[500]
     },
     menuItem: {
-        color: grey[50],
         fontSize: "16px",
         fontWeight: 400,
         fontFamily: "Roboto, Helvetica, Arial, sans-serif",
@@ -76,10 +80,10 @@ class AdminArea extends React.Component {
                         </Grid>
                         <Grid item xs={12} sm={12}>
                             <Typography className={classes.menuDescription} type="body1" gutterBottom>
-                                Petit projet POC sur une stack technique complète.<br/><br/>
-                                    Objectif : <br/>
-                                    - Créer rapidement un questionnaire en ligne diffusable avec un lien permanent.<br/>
-                                    - Exploiter les résultats sous différentes formes.<br/><br/>
+                                Petit projet POC sur une stack technique complète.<br /><br />
+                                Objectif : <br />
+                                - Créer rapidement un questionnaire en ligne diffusable avec un lien permanent.<br />
+                                - Exploiter les résultats sous différentes formes.<br /><br />
                                 Cheers
                             </Typography>
                         </Grid>
@@ -87,31 +91,43 @@ class AdminArea extends React.Component {
                             <div className={classes.divider} />
                         </Grid>
                         <Grid item xs={12} sm={12}>
-                            <List className={classes.menuItem}>
-                                <ListItem button>
-                                    <ListItemIcon className={classes.menuIcon}>
-                                        <DashboardIcon />
-                                    </ListItemIcon>
-                                    <ListItemText
-                                        disableTypography
-                                        primary="Dashboard" />
-                                </ListItem>
-                                <ListItem button>
-                                    <ListItemIcon className={classes.menuIcon}>
-                                        <ListIcon />
-                                    </ListItemIcon>
-                                    <ListItemText
-                                        disableTypography
-                                        primary="Surveys" />
-                                </ListItem>
-                            </List>
+                            <Paper>
+                                <List className={classes.menuItem} disablePadding>
+                                    <ListItem button divider>
+                                        <ListItemIcon className={classes.menuIcon}>
+                                            <DashboardIcon />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            disableTypography
+                                            primary="Dashboard" />
+                                    </ListItem>
+                                    <ListItem button divider>
+                                        <ListItemIcon className={classes.menuIcon}>
+                                            <ListIcon />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            disableTypography
+                                            primary="Surveys" />
+                                    </ListItem>
+                                    <ListItem button>
+                                        <ListItemIcon className={classes.menuIcon}>
+                                            <SettingsIcon />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            disableTypography
+                                            primary="Settings" />
+                                    </ListItem>
+                                </List>
+                            </Paper>
                             {/* <Link to="/">dashboard</Link>
-                            <Link to="/surveylist">surveys</Link> */}
+                            <Link to="/surveylist">surveys</Link>
+                            containerElement={<Link to="/foo" />} */}
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid item xs={10} sm={10}>
-                    {this.props.children}
+                    <Route exact path="/" component={Dashboard} />
+                    <Route path="/surveylist" component={SurveyList} />
                 </Grid>
             </Grid>);
     }

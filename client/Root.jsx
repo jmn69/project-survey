@@ -1,12 +1,18 @@
-import React, { Component } from 'react';
-import { Router, browserHistory } from 'react-router';
+import React from 'react';
+import {Provider} from 'react-redux';
+import {BrowserRouter } from 'react-router-dom';
+import { MuiThemeProvider } from 'material-ui/styles';
 
-export default class Root extends Component {
-  render() {
-    return (
-      <Router history={browserHistory}>
-        {this.props.routes()}
-      </Router>
-    );
-  }
+import App from './App';
+
+export default function Root({ store, theme }) {
+  return (
+    <Provider store={store}>
+        <MuiThemeProvider theme={theme}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </MuiThemeProvider>
+    </Provider>
+  );
 }

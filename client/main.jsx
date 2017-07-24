@@ -1,45 +1,29 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import thunkMiddleware from 'redux-thunk';
-import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
-import { createLogger } from 'redux-logger';
-import { MuiThemeProvider } from 'material-ui/styles';
 
-import Root from './Root.jsx';
-import routes from './routes.js';
-import rootReducer from './rootReducer';
-import theme from './muiTheme.js';
+import { configureStore } from './store/configureStore';
+import theme from './muiTheme';
+import App from './App';
+import Root from './Root';
 
 const initialState = { auth: { loggedIn: false, currentURL: "", isFetching: false } };
-const loggerMiddleware = createLogger();
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(rootReducer, initialState, composeEnhancers(
-    applyMiddleware(thunkMiddleware, loggerMiddleware)
-));
+const store = configureStore(initialState);
 
-const renderApp = appRoutes => {
-    render(
-        <Provider store={store}>
-            <MuiThemeProvider theme={theme}>
-                <AppContainer>
-                    <Root routes={appRoutes} />
-                </AppContainer>
-            </MuiThemeProvider>
-        </Provider>,
+const render = Component => {
+    ReactDOM.render(
+        <AppContainer>
+            <Component store={store} theme={theme} />
+        </AppContainer>,
         document.getElementById('app')
-    );
-};
+    )
+}
 
-renderApp(routes);
+render(Root);
 
 if (module.hot) {
-    module.hot.accept('./routes', () => {
-        const newRoutes = require('./routes').default;
-        renderApp(newRoutes);
-    });
-
+    module.hot.accept(() => { render(Root) })
     module.hot.accept('./rootReducer', () => {
         const nextReducer = require('./rootReducer').default;
         store.replaceReducer(nextReducer);

@@ -2,28 +2,28 @@ import React, { Component, PropTypes } from 'react';
 import * as redux from 'redux'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import { authenticate, setRedirectUrl } from './actions.js';
 
 export default (ChildComponent) => {
   class AuthenticatedComponent extends Component {
 
     componentDidMount() {
-      const { currentURL } = this.props
+      const { currentURL, history } = this.props
       this.props.authenticate().then(data => {
-        if (!this.props.isLoggedIn) {
+        if (!data) {
           this.props.setRedirectUrl(currentURL);
-          browserHistory.replace("/signin")
+          history.push("/signin")
         }
       });
     }
 
     componentDidUpdate() {
-      const { currentURL } = this.props
+      const { currentURL, history } = this.props
       this.props.authenticate().then(data => {
-        if (!this.props.isLoggedIn) {
+        if (!data) {
           this.props.setRedirectUrl(currentURL);
-          browserHistory.replace("/signin")
+          history.push("/signin")
         }
       });
     }
@@ -51,5 +51,5 @@ export default (ChildComponent) => {
     }, dispatch);
   }
 
-  return connect(mapStateToProps, mapDispatchToProps)(AuthenticatedComponent)
+  return withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthenticatedComponent))
 }

@@ -1,11 +1,10 @@
 import React from 'react';
-import {IndexLink, Link, browserHistory} from 'react-router';
-import {connect} from 'react-redux';
-import MediaQuery from 'react-responsive';
+import { connect } from 'react-redux';
+import { Route, withRouter } from 'react-router-dom';
 
-const styles = {
-
-};
+import SignIn from './pages/SignIn';
+import AdminArea from './pages/AdminArea';
+import RequireAuthentication from './auth/RequireAuthentication.js';
 
 class App extends React.Component {
 
@@ -16,11 +15,11 @@ class App extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (!this.props.loggedIn && nextProps.loggedIn) {
       console.log("login");
-      const {currentURL} = this.props;
+      const { currentURL, history } = this.props;
       if (currentURL)
-        browserHistory.push(currentURL);
+        history.push(currentURL);
       else
-        browserHistory.push('/');
+        history.push('/');
     } else if (this.props.loggedIn && !nextProps.loggedIn) {
       console.log("logout");
     }
@@ -29,19 +28,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-
-        {/* -------------- Smartphone et tablette ---------------- */}
-
-        <MediaQuery query='(max-width : 1024px)'>
-
-        </MediaQuery>
-
-        {/* -------------- PC & TV ---------------- */}
-
-        <MediaQuery query='(min-width : 1024px)'>
-
-        </MediaQuery>
-        {this.props.children}
+        <Route exact path="/" component={RequireAuthentication(AdminArea)} />
+        <Route path="/signin" component={SignIn} />
       </div>
     );
   }
@@ -54,4 +42,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps)(App)
+export default withRouter(connect(mapStateToProps)(App))
