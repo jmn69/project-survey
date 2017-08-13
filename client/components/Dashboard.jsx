@@ -1,7 +1,7 @@
 import React from 'react';
 import MediaQuery from 'react-responsive';
-import { Link } from 'react-router';
-import Typography from 'material-ui/Typography';
+// import { Link } from 'react-router';
+// import Typography from 'material-ui/Typography';
 
 export default class Dashboard extends React.Component {
     constructor(props) {
@@ -12,9 +12,7 @@ export default class Dashboard extends React.Component {
     render() {
         return (
             <div>
-                <Typography type="body1">
-                Dashboard
-                </Typography>
+                <span className="label label-default">Dashboard</span>     
             </div>);
     }
 }

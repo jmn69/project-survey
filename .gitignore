@@ -25,6 +25,10 @@ bld/
 # Coverage directory used by tools like istanbul
 coverage
 
+buildClient
+buildServer
+public
+
 # heroku local env
 .env
 

@@ -1,31 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
+import createHistory from 'history/createBrowserHistory';
 import { Provider } from 'react-redux';
 
-import { configureStore } from './store/configureStore';
-import theme from './muiTheme';
-import App from './App';
-import Root from './Root';
+import configureStore from './configureStore';
+import App from './components/App';
 
-const initialState = { auth: { loggedIn: false, currentURL: "", isFetching: false } };
-const store = configureStore(initialState);
+const history = createHistory();
+const { store } = configureStore(history, window.REDUX_STATE)
 
-const render = Component => {
+const render = App => {
+    const root = document.getElementById('app');
+
     ReactDOM.render(
         <AppContainer>
-            <Component store={store} theme={theme} />
+            <Provider store={store}>
+                <App />
+            </Provider>
         </AppContainer>,
-        document.getElementById('app')
-    )
-}
+        root
+    );
+};
 
-render(Root);
+render(App);
 
-if (module.hot) {
-    module.hot.accept(() => { render(Root) })
-    module.hot.accept('./rootReducer', () => {
-        const nextReducer = require('./rootReducer').default;
-        store.replaceReducer(nextReducer);
+if (module.hot && process.env.NODE_ENV === 'development') {
+    module.hot.accept('./components/App', () => {
+        const App = require('./components/App').default;
+        render(App);
     });
 }

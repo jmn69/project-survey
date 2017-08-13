@@ -1,8 +1,6 @@
-import { SET_REDIRECT_URL } from './actions.js';
-
 const initialState = {
   loggedIn: false,
-  currentURL: "",
+  currentUrl: "",
   isFetching: false
 }
 
@@ -11,7 +9,7 @@ export default function auth(state = initialState, action) {
     case "SET_REDIRECT_URL":
       return {
         ...state,
-        currentURL: action.url
+        currentUrl: action.url
       };
     case "LOGIN_SUCCESS":
       return {

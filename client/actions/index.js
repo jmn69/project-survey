@@ -1,14 +1,55 @@
+import { NOT_FOUND } from 'redux-first-router';
+import routesMap from '../routesMap';
+
 const LOGIN_FAILED = 'LOGIN_FAILED';
 const SET_REDIRECT_URL = 'SET_REDIRECT_URL';
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const REQUEST_BEGIN = 'REQUEST_BEGIN';
 const REQUEST_END = 'REQUEST_END';
+// try dispatching these from the redux devTools
 
+export const goToPage = (type, category) => ({
+  type,
+  payload: category && { category }
+})
+
+export const goToDashboard = () => ({
+  type: 'DASHBOARD'
+})
+
+export const goToSettings = () => ({
+  type: 'SETTINGS'
+})
+
+export const notFound = () => ({
+  type: NOT_FOUND
+})
+
+export const goToSignin = () => ({
+  type: 'SIGNIN'
+})
+
+export const goToSurveylist = () => ({
+  type: 'SURVEYLIST'
+})
 
 export const setRedirectUrl = url => {
   return {
     type: SET_REDIRECT_URL,
     url
+  }
+}
+
+export const goTo = (url) => {
+  let type = NOT_FOUND;
+  for (var propertyName in routesMap) {
+    if (routesMap[propertyName].path === url) {
+      type = propertyName;
+      break;
+    }
+  }
+  return {
+    type: type
   }
 }
 
@@ -23,7 +64,7 @@ export const authentication = (payload) => {
     })
       .then(res => { return res.json(); })
       .then(json => {
-         if (json.success)
+        if (json.success)
           dispatch(loginSuccess());
         else
           dispatch(loginFailed());

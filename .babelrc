@@ -1,11 +1,13 @@
 {
   "presets": [
-    ["es2015", { "modules": false }],
-    "react"
+    "es2015",
+    "react",
+    "stage-2"
   ],
   "plugins": [
     "transform-es2015-destructuring",
-    "transform-object-rest-spread"
+    "transform-object-rest-spread",
+    "universal-import"
   ],
   "env": {
     "development": {
@@ -16,7 +18,8 @@
     "test": {
       "presets": [
         "es2015",
-        "react"
+        "react",
+        "stage-2"
       ]
     }
   }
