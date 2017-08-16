@@ -31,7 +31,7 @@ export default ({ clientStats }) => async (req, res, next) => {
         <head>
           <meta charset="utf-8">
           <title>project-survey</title>
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+          <link rel="stylesheet" href="https://bootswatch.com/4-alpha/flatly/bootstrap.min.css">
           ${styles}
         </head>
         <body>

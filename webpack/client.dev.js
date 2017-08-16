@@ -44,18 +44,6 @@ module.exports = {
             }
           }
         })
-      },
-      {
-        test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 100000,
-              name: '[name].[ext]'
-            }
-          }
-        ]
       }
     ]
   },
@@ -93,7 +81,7 @@ module.exports = {
           'fetch-everywhere',
           'babel-polyfill',
           'redux-devtools-extension/logOnlyInProduction',
-          'react-bootstrap'
+          'reactstrap'
         ]
       }
     })

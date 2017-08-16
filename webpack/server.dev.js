@@ -55,19 +55,7 @@ module.exports = {
             localIdentName: '[name]__[local]--[hash:base64:5]'
           }
         }
-      },
-      {
-        test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
-        use: [
-          {
-            loader:  'url-loader',
-            options: {
-              limit: 100000,
-              name: '[name].[ext]'
-            }
-          }
-        ]
-}
+      }
     ]
   },
   resolve: {

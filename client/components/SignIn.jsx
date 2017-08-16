@@ -1,8 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import {
+    Container, Row, Col, Button,
+    Form, FormGroup, Label, Input, FormText,
+    Card, CardHeader, CardBlock
+} from 'reactstrap';
 
 import { authentication, goTo } from '../actions';
+import styles from '../css/Signin';
 
 // const styleSheet = createStyleSheet('Signin', (theme) => ({
 //     root: {
@@ -60,26 +66,53 @@ class SignIn extends React.Component {
     }
 
     render() {
-        const classes = this.props.classes;
-
         return (
-            <div>
-                Administration area
-                <input
-                    id="email"
-                    onChange={this.onEmailChange}
-                    value={this.state.email}
-                />
-                <input
-                    id="password"
-                    type="password"
-                    onChange={this.onPasswordChange}
-                    value={this.state.password}
-                />
-                <button onClick={this.onLoginSubmit} >
-                    Connexion
-                </button>
-            </div>
+            <Container fluid>
+                <Row className={`${styles.root} align-items-center justify-content-center`}>
+                    <Col md="4">
+                        <Card>
+                            <CardHeader className="card-primary card-inverse">Manage your surveys</CardHeader>
+                            <CardBlock className="bg-faded">
+                                <Form>
+                                    <FormGroup>
+                                        <Label for="signin-email">Email</Label>
+                                        <Input
+                                            type="email"
+                                            name="email"
+                                            id="signin-email"
+                                            placeholder="enter your email"
+                                            onChange={this.onEmailChange}
+                                            value={this.state.email}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="signin-password">Password</Label>
+                                        <Input
+                                            type="password"
+                                            name="password"
+                                            id="signin-password"
+                                            placeholder="enter your password"
+                                            onChange={this.onPasswordChange}
+                                            value={this.state.password}
+                                        />
+                                    </FormGroup>
+                                    <Row className="justify-content-end">
+                                        <Col md="auto">
+                                            <Button
+                                                onClick={this.onLoginSubmit}
+                                                color="success"
+
+                                            >
+                                                Connexion
+                                                </Button>
+                                        </Col>
+                                    </Row>
+                                </Form>
+                            </CardBlock>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 

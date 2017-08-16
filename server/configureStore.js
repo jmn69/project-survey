@@ -4,8 +4,8 @@ import configureStore from '../client/configureStore';
 import {setRedirectUrl} from '../client/actions';
 
 export default async (req, res) => {
-  console.log("auth : " + req.isAuthenticated())
-  console.log("path: " + req.session.currentUrl);
+  // console.log("auth : " + req.isAuthenticated())
+  // console.log("path: " + req.session.currentUrl);
   const preLoadedState = { 
     auth: { 
       loggedIn: req.isAuthenticated(),
