@@ -16,9 +16,10 @@
     "coverageDirectory": "./coverage/",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "**/client/*.{js,jsx}",
-      "!**/node_modules/**",
-      "**/server/*.{js}"
+      "**/client/actions/*.{js,jsx}",
+      "**/client/components/*.{js,jsx}",
+      "**/client/reducers/*.{js,jsx}",
+      "!**/node_modules/**"
     ],
     "coverageThreshold": {
       "global": {
@@ -82,6 +83,7 @@
     "redux-first-router": "^1.9.12",
     "redux-first-router-link": "^1.1.3",
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.2.3",
     "redux-thunk": "^2.2.0",
     "rimraf": "^2.6.1",
     "stats-webpack-plugin": "^0.6.1",

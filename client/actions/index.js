@@ -1,5 +1,6 @@
 import { NOT_FOUND } from 'redux-first-router';
 import routesMap from '../routesMap';
+import API from '../api';
 
 const LOGIN_FAILED = 'LOGIN_FAILED';
 const SET_REDIRECT_URL = 'SET_REDIRECT_URL';
@@ -56,13 +57,7 @@ export const goTo = (url) => {
 export const authentication = (payload) => {
   return dispatch => {
     dispatch(requestBegin());
-    return fetch('/authentication', {
-      method: "POST",
-      credentials: "include",
-      body: JSON.stringify(payload),
-      headers: { 'content-type': 'application/json' },
-    })
-      .then(res => { return res.json(); })
+    return API.authentication(payload)
       .then(json => {
         if (json.success)
           dispatch(loginSuccess());
@@ -101,12 +96,7 @@ function requestEnd() {
 export const authenticate = () => {
   return dispatch => {
     dispatch(requestBegin());
-    return fetch('/authenticate', {
-      method: 'GET',
-      credentials: "same-origin",
-      headers: { 'content-type': 'application/json' },
-    })
-      .then(response => response.json())
+    return API.authenticate(payload)
       .then(json => {
         if (json.authenticated)
           dispatch(loginSuccess());
