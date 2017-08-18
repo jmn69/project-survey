@@ -21,6 +21,9 @@
       "**/client/reducers/*.{js,jsx}",
       "!**/node_modules/**"
     ],
+    "moduleNameMapper": {
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
+    },
     "coverageThreshold": {
       "global": {
         "branches": 85,
