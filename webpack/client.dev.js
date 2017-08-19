@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const WriteFilePlugin = require('write-file-webpack-plugin');
 const AutoDllPlugin = require('autodll-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
-var APP_DIR = path.join(__dirname, '..', 'client');
 
 module.exports = {
   name: 'client',

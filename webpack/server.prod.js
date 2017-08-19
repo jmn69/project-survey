@@ -35,9 +35,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: 'babel-loader'
+        test: /\.(js|jsx)$/,
+        use: [
+          {
+            loader: "babel-loader"
+          }
+        ],
+        exclude: /node_modules/
       },
       {
         test: /\.css$/,
@@ -53,7 +57,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.css']
+    extensions: ['.js', '.jsx', '.css']
   },
   plugins: [
     new webpack.optimize.LimitChunkCountPlugin({

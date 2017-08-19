@@ -11,7 +11,7 @@ module.exports = {
   entry: [
     'babel-polyfill',
     'fetch-everywhere',
-    path.resolve(__dirname, '../src/index.js')
+    path.resolve(__dirname, '../client/index.jsx')
   ],
   output: {
     filename: '[name].[chunkhash].js',
@@ -22,9 +22,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: 'babel-loader'
+        test: /\.(js|jsx)$/,
+        use: [
+          {
+            loader: "babel-loader"
+          }
+        ],
+        exclude: /node_modules/
       },
       {
         test: /\.css$/,
@@ -41,7 +45,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.css']
+    extensions: ['.js', '.jsx', '.css']
   },
   plugins: [
     new StatsPlugin('stats.json'),
@@ -87,7 +91,8 @@ module.exports = {
           'redux-first-router-link',
           'fetch-everywhere',
           'babel-polyfill',
-          'redux-devtools-extension/logOnlyInProduction'
+          'redux-devtools-extension/logOnlyInProduction',
+          'reactstrap'
         ]
       }
     })
