@@ -20,9 +20,8 @@ const DEV = process.env.NODE_ENV === 'development';
 const publicPath = clientConfig.output.publicPath;
 const outputPath = clientConfig.output.path;
 var users = require('../server/controllers/user');
-// import {authentication, authenticate} from './controllers/user';
 var app = express();
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8000;
 
 app.use(cookieParser());
 app.use(bodyParser.json());
