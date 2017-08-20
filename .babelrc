@@ -20,6 +20,16 @@
         "es2015",
         "react",
         "stage-2"
+      ],
+      "plugins": [
+        ["module-resolver", {
+          "root": ["./"],
+          "alias": {
+            "client": "./client"
+          }
+        }],
+        "dynamic-import-node",
+        "transform-es2015-modules-commonjs"
       ]
     }
   }
