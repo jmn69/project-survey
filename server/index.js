@@ -19,8 +19,8 @@ import bodyParser from 'body-parser';
 const DEV = process.env.NODE_ENV === 'development';
 const publicPath = clientConfig.output.publicPath;
 const outputPath = clientConfig.output.path;
-var users = require('./controllers/user');
-
+var users = require('../server/controllers/user');
+// import {authentication, authenticate} from './controllers/user';
 var app = express();
 var port = process.env.PORT || 3000;
 
