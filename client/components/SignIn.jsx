@@ -53,33 +53,38 @@ export class SignIn extends React.Component {
         return (
             <Container fluid>
                 <Row className={`${styles.root} align-items-center justify-content-center`}>
-                    <Col md="4">
+                    <Col xs="12" sm="8" md="4">
                         <Card>
                             <CardHeader className="card-primary card-inverse">Manage your surveys</CardHeader>
                             <CardBlock className="bg-faded">
+                            <br />
                                 <Form>
-                                    <FormGroup>
-                                        <Label for="signin-email">Email</Label>
-                                        <Input
-                                            type="email"
-                                            name="email"
-                                            id="signin-email"
-                                            placeholder="enter your email"
-                                            onChange={this.onEmailChange}
-                                            value={this.state.email}
-                                        />
+                                    <FormGroup row className="align-items-center justify-content-center">
+                                        <Col xs="12" sm="12" md="10" lg="8">
+                                            <Input
+                                                type="email"
+                                                name="email"
+                                                id="signin-email"
+                                                placeholder="Email"
+                                                onChange={this.onEmailChange}
+                                                value={this.state.email}
+                                            />
+                                        </Col>
                                     </FormGroup>
-                                    <FormGroup>
-                                        <Label for="signin-password">Password</Label>
-                                        <Input
-                                            type="password"
-                                            name="password"
-                                            id="signin-password"
-                                            placeholder="enter your password"
-                                            onChange={this.onPasswordChange}
-                                            value={this.state.password}
-                                        />
+                                    <br />
+                                    <FormGroup row className="align-items-center justify-content-center">
+                                        <Col xs="12" sm="12" md="10" md="8">
+                                            <Input
+                                                type="password"
+                                                name="password"
+                                                id="signin-password"
+                                                placeholder="Password"
+                                                onChange={this.onPasswordChange}
+                                                value={this.state.password}
+                                            />
+                                        </Col>
                                     </FormGroup>
+                                    <br />
                                     <Row className="justify-content-end">
                                         <Col md="auto">
                                             <Button
