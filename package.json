@@ -12,7 +12,7 @@
     "build:server": "rimraf buildServer && cross-env NODE_ENV=production webpack --progress -p --config webpack/server.prod.js",
     "build:node": "cross-env NODE_ENV=production babel server/index.js -o buildServer/index.js",
     "clean": "rimraf buildClient buildServer",
-    "test": "jest --showConfig && jest && codecov",
+    "test": "jest && codecov",
     "heroku-postbuild": "npm run build"
   },
   "jest": {
@@ -29,7 +29,6 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
     },
-    "roots": ["<rootDir>/client/", "<rootDir>/__tests__/"],
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
     }
