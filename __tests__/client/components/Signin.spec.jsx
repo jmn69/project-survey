@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import fetch from 'fetch-everywhere';
 
 import API from 'client/api';
-import SigninConnected, { SignIn, mapStateToProps, mapDispatchToProps } from 'client/components/Signin.jsx';
+import SigninConnected, { SignIn, mapStateToProps, mapDispatchToProps } from 'client/components/SignIn.jsx';
 const mockAPI = {
   authentication: jest.spyOn(API, "authentication").mockImplementation(async () => ({ success: true }))
 };
