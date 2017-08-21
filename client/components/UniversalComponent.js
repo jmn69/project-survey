@@ -1,6 +1,6 @@
 import React from 'react';
 import universal from 'react-universal-component';
-import { spinner, admin, login, notFound } from '../css/Switcher';
+import { spinner, admin, login, notFound } from '../css/Switcher.css';
 
 const loading = () => <div ><div /></div>
 
