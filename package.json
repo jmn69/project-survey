@@ -12,7 +12,7 @@
     "build:server": "rimraf buildServer && cross-env NODE_ENV=production webpack --progress -p --config webpack/server.prod.js",
     "build:node": "cross-env NODE_ENV=production babel server/index.js -o buildServer/index.js",
     "clean": "rimraf buildClient buildServer",
-    "test": "jest && codecov",
+    "test": "jest --showConfig && jest && codecov",
     "heroku-postbuild": "npm run build"
   },
   "jest": {
