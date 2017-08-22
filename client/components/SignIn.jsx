@@ -107,7 +107,7 @@ export class SignIn extends React.Component {
 }
 
 export const mapStateToProps = (state, ownProps) => {
-    return { currentUrl: state.auth.currentUrl }
+    return { currentUrl: state.app.currentUrl }
 }
 
 export const mapDispatchToProps = (dispatch) => {

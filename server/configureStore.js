@@ -7,7 +7,7 @@ export default async (req, res) => {
   // console.log("auth : " + req.isAuthenticated())
   // console.log("path: " + req.session.currentUrl);
   const preLoadedState = { 
-    auth: { 
+    app: { 
       loggedIn: req.isAuthenticated(),
       currentUrl: req.session.currentUrl
     } 

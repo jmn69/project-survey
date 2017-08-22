@@ -4,7 +4,7 @@ const initialState = {
   isFetching: false
 }
 
-export default function auth(state = initialState, action) {
+export default function app(state = initialState, action) {
   switch (action.type) {
     case "SET_REDIRECT_URL":
       return {

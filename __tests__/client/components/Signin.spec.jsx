@@ -78,7 +78,7 @@ describe('SignIn', () => {
     describe('SignIn container', () => {
       it("mapStateToProps", function () {
         const state = {
-          auth: {
+          app: {
             currentUrl: "/"
           }
         };

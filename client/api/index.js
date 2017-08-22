@@ -10,7 +10,7 @@ const API = {
         .then(res => { return res.json(); });
     },
     
-    async authenticate(payload) {
+    async authenticate() {
         return fetch('/authenticate', {
             method: 'GET',
             credentials: "same-origin",

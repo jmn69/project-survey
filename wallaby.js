@@ -26,7 +26,7 @@ module.exports = wallaby => {
       'client/**/*.css'
     ],
 
-    tests: ['__tests__/**/*.jsx'],
+    tests: ['__tests__/**/*.jsx', '__tests__/**/*.js'],
 
     preprocessors: {
       'client/**/*.css': processCss,
