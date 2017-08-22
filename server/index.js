@@ -8,32 +8,30 @@ import webpackHotServerMiddleware from 'webpack-hot-server-middleware';
 import clientConfig from '../webpack/client.dev';
 import serverConfig from '../webpack/server.dev';
 import path from 'path';
-import conf from '../config';
 import mongoose from 'mongoose';
 import passport from 'passport';
 import session from 'express-session';
 const MongoStore = require('connect-mongo')(session);
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
+import {port, DEV, connexionString, session_secret} from 'client/config';
 
-const DEV = process.env.NODE_ENV === 'development';
 const publicPath = clientConfig.output.publicPath;
 const outputPath = clientConfig.output.path;
 var users = require('../server/controllers/user');
 var app = express();
-var port = process.env.PORT || 8000;
 
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var connexion = mongoose.createConnection(conf.connexionString);
+var connexion = mongoose.createConnection(connexionString);
 
 app.use(morgan('dev'));
 
 // required for passport
 app.use(session({
-  secret: conf.session_secret,
+  secret: session_secret,
   resave: true,
   saveUninitialized: true,
   rolling: true,

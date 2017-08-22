@@ -1,7 +1,8 @@
 import fetch from 'fetch-everywhere';
+import {server} from 'client/config';
 const API = {
     async authentication(payload) {
-        return fetch('/authentication', {
+        return fetch(`${server}/authentication`, {
             method: "POST",
             credentials: "include",
             body: JSON.stringify(payload),
@@ -11,7 +12,7 @@ const API = {
     },
     
     async authenticate() {
-        return fetch('/authenticate', {
+        return fetch(`${server}/authenticate`, {
             method: 'GET',
             credentials: "same-origin",
             headers: { 'content-type': 'application/json' },
