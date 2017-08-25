@@ -14,7 +14,7 @@ import session from 'express-session';
 const MongoStore = require('connect-mongo')(session);
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
-import {port, DEV, connexionString, session_secret} from 'client/config';
+import {port, DEV, connexionString, session_secret} from '../client/config';
 
 const publicPath = clientConfig.output.publicPath;
 const outputPath = clientConfig.output.path;

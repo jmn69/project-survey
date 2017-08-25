@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
-var conf = require('../../config');
+var conf = require('../../client/config');
 
 var db = mongoose.createConnection(conf.connexionString);
 
