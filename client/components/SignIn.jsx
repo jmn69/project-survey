@@ -1,11 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {
-    Container, Row, Col, Button,
-    Form, FormGroup, Label, Input, FormText,
-    Card, CardHeader, CardBlock
-} from 'reactstrap';
+
+import Container from 'reactstrap/lib/Container';
+import Button from 'reactstrap/lib/Button';
+import Row from 'reactstrap/lib/Row';
+import Col from 'reactstrap/lib/Col';
+import Form from 'reactstrap/lib/Form';
+import FormGroup from 'reactstrap/lib/FormGroup';
+import Label from 'reactstrap/lib/Label';
+import Input from 'reactstrap/lib/Input';
+import FormText from 'reactstrap/lib/FormText';
+import Card from 'reactstrap/lib/Card';
+import CardHeader from 'reactstrap/lib/CardHeader';
+import CardBlock from 'reactstrap/lib/CardBlock';
 
 import { authentication, goTo } from '../actions';
 import styles from '../css/Signin.css';
