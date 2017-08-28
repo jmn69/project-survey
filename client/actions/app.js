@@ -38,6 +38,7 @@ export const authentication = (payload) => {
         else
           dispatch(loginFailed());
         dispatch(requestEnd());
+        return json;
       })
       .catch(error => { console.log('request failed', error); })
   }

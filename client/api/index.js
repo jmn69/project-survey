@@ -8,8 +8,7 @@ const API = {
             body: JSON.stringify(payload),
             headers: { 'content-type': 'application/json' },
         })
-            .then(res => { return res.json(); });
-             
+            .then(res => { return res.json(); })
     },
 
     authenticate() {

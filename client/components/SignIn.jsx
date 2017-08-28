@@ -14,6 +14,7 @@ import FormText from 'reactstrap/lib/FormText';
 import Card from 'reactstrap/lib/Card';
 import CardHeader from 'reactstrap/lib/CardHeader';
 import CardBlock from 'reactstrap/lib/CardBlock';
+import FormFeedback from 'reactstrap/lib/FormFeedback';
 
 import { authentication, goTo } from '../actions';
 import styles from '../css/Signin.css';
@@ -23,7 +24,8 @@ export class SignIn extends React.Component {
         super(props)
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            errors: null
         }
 
         this.onEmailChange = this.onEmailChange.bind(this);
@@ -45,16 +47,36 @@ export class SignIn extends React.Component {
         this.setState({ password: ev.target.value });
     }
 
-    onLoginClick() {
+    async onLoginClick() {
         var payload = {
             email: this.state.email,
             password: this.state.password
         };
 
-        this.props.authentication(payload).then(data => {
+        const data = await this.props.authentication(payload);
+        if (data.success) {
             const url = this.props.currentUrl ? this.props.currentUrl : "/";
             this.props.goTo(url);
-        });
+        }
+        else {
+            const errors = { ...this.state.errors, authentication: "Mmmh, il y a une erreur avec l'email ou le password" };
+            this.setState({ errors: errors });
+        }
+    }
+
+    renderError(property) {
+        const error = this.state.errors && this.state.errors[property];
+        if (error) {
+            return (
+                <FormText color="danger">{error}</FormText>
+            );
+        }
+    }
+
+    renderLoading() {
+        return this.props.isLoading
+            ? <i className="fa fa-spinner fa-pulse fa-1x fa-fw" style={{ marginLeft: "1rem" }} aria-hidden="true"></i>
+            : null;
     }
 
     render() {
@@ -65,7 +87,7 @@ export class SignIn extends React.Component {
                         <Card>
                             <CardHeader className="card-primary card-inverse">Manage your surveys</CardHeader>
                             <CardBlock className="bg-faded">
-                            <br />
+                                <br />
                                 <Form>
                                     <FormGroup row className="align-items-center justify-content-center">
                                         <Col xs="12" sm="12" md="10" lg="8">
@@ -90,6 +112,7 @@ export class SignIn extends React.Component {
                                                 onChange={this.onPasswordChange}
                                                 value={this.state.password}
                                             />
+                                            {this.renderError("authentication")}
                                         </Col>
                                     </FormGroup>
                                     <br />
@@ -101,6 +124,7 @@ export class SignIn extends React.Component {
 
                                             >
                                                 Connexion
+                                                {this.renderLoading()}
                                             </Button>
                                         </Col>
                                     </Row>
@@ -115,7 +139,10 @@ export class SignIn extends React.Component {
 }
 
 export const mapStateToProps = (state, ownProps) => {
-    return { currentUrl: state.app.currentUrl }
+    return {
+        currentUrl: state.app.currentUrl,
+        isLoading: state.app.isFetching
+    }
 }
 
 export const mapDispatchToProps = (dispatch) => {

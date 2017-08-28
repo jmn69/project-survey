@@ -2,13 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import fetch from 'fetch-everywhere';
+import FormText from 'reactstrap/lib/FormText';
 
+import { server, port } from 'client/config';
 import API from 'client/api';
 import SigninConnected, { SignIn, mapStateToProps, mapDispatchToProps } from 'client/components/SignIn.jsx';
-const mockAPI = {
-  authentication: jest.spyOn(API, "authentication").mockImplementation(async () => ({ success: true }))
-};
+
+jest.spyOn(API, "authentication").mockImplementation(async () => ({ success: true }))
 
 const mockStore = configureStore([thunk]);
 
@@ -63,16 +63,71 @@ describe('SignIn', () => {
       })
     });
 
+    it('should render errors', () => {
+      const wrapper = shallow(<SignIn />);
+      wrapper.setState({
+        errors: { test: "test error" }
+      });
+      const renderError = wrapper.instance().renderError("test");
+      expect(renderError).toEqual(
+        <FormText color="danger">test error</FormText>
+      );
+    });
+
+    it('should render the loading spinner', () => {
+      const wrapper = shallow(<SignIn />);
+      wrapper.setProps({
+        isLoading: true
+      });
+      const renderLoading = wrapper.instance().renderLoading();
+      expect(renderLoading).toEqual(
+        <i
+          className="fa fa-spinner fa-pulse fa-1x fa-fw"
+          style={{ marginLeft: "1rem" }}
+          aria-hidden="true"
+        >
+        </i>
+      );
+    });
+
+    it('should not render the loading spinner', () => {
+      const wrapper = shallow(<SignIn />);
+      wrapper.setProps({
+        isLoading: false
+      });
+      const renderLoading = wrapper.instance().renderLoading();
+      expect(renderLoading).toEqual(null);
+    });
+
     it('should login on click', () => {
       const wrapper = shallow(<SignIn />);
-      const mockAuth = jest.fn(async (payload) => {});
+      const mockAuth = jest.fn(() => Promise.resolve({ success: true }));
       const mockGoTo = jest.fn();
-      wrapper.setProps({ 
+      wrapper.setProps({
         authentication: mockAuth,
         goTo: mockGoTo
-       });
+      });
       wrapper.instance().onLoginClick();
       expect(mockAuth).toHaveBeenCalled();
+    });
+
+    it('should set errors when login failed', () => {
+      const wrapper = shallow(<SignIn />);
+      const promise = Promise.resolve({ success: false });
+      const mockAuth = jest.fn(() => promise);
+      const mockGoTo = jest.fn();
+
+      wrapper.setProps({
+        authentication: mockAuth,
+        goTo: mockGoTo
+      });
+      
+      wrapper.instance().onLoginClick();
+      return promise
+      .then(() => {
+        expect(wrapper).toHaveState('errors', {authentication: "Mmmh, il y a une erreur avec l'email ou le password"});
+      });
+      
     });
 
     describe('SignIn container', () => {
@@ -91,6 +146,7 @@ describe('SignIn', () => {
       describe("mapDispatchToProps", function () {
 
         it("authentication", function () {
+
           const { store, fn } = prepare("authentication", {});
           fn().then(() => {
             expect(store.getActions().map(a => a.type)).toEqual([

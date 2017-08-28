@@ -15,9 +15,8 @@ const Switcher = ({ page, direction }) =>
     </Transition>
   </TransitionGroup>
 
-const mapState = ({ page, direction, ...state }) => ({
-  page,
-  direction
+const mapState = ({ page, ...state }) => ({
+  page
 })
 
 export default connect(mapState)(Switcher)

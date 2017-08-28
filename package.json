@@ -26,6 +26,7 @@
       "node_modules",
       "client"
     ],
+    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
@@ -62,10 +63,13 @@
     "extract-css-chunks-webpack-plugin": "^2.0.16",
     "fetch-mock": "^5.12.2",
     "file-loader": "^0.11.2",
+    "font-awesome": "^4.7.0",
     "image-webpack-loader": "^3.3.1",
     "jest": "=20.0.3",
+    "jest-enzyme": "^3.8.0",
     "jquery": "^3.2.1",
     "moment": "^2.18.1",
+    "node-sass": "^4.5.3",
     "postcss": "^6.0.9",
     "postcss-cssnext": "^3.0.2",
     "postcss-modules": "^0.8.0",
@@ -90,6 +94,7 @@
     "express": "^4.15.3",
     "express-session": "^1.15.3",
     "fetch-everywhere": "^1.0.5",
+    "font-awesome-sass-loader": "^2.0.1",
     "history": "^4.6.3",
     "install": "^0.10.1",
     "mongoose": "^4.10.8",
