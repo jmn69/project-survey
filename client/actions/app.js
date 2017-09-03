@@ -3,8 +3,10 @@ import routesMap from '../routesMap';
 import API from '../api';
 
 export const LOGIN_FAILED = 'LOGIN_FAILED';
-export const SET_REDIRECT_URL = 'SET_REDIRECT_URL';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGOUT_FAILED = 'LOGOUT_FAILED';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const SET_REDIRECT_URL = 'SET_REDIRECT_URL';
 export const REQUEST_BEGIN = 'REQUEST_BEGIN';
 export const REQUEST_END = 'REQUEST_END';
 
@@ -28,6 +30,13 @@ export const goTo = (url) => {
   }
 }
 
+export const goToPage = (type, payload) => {
+  return {
+    type,
+    payload: payload
+  }
+}
+
 export const authentication = (payload) => {
   return dispatch => {
     dispatch(requestBegin());
@@ -44,6 +53,25 @@ export const authentication = (payload) => {
   }
 }
 
+export const signOut = () => {
+  return dispatch => {
+    dispatch(requestBegin());
+    return API.logout()
+    .then(json => {
+      if (json.success)
+        {
+        dispatch(logoutSuccess());
+        dispatch(goToPage('SIGNIN'));
+        }
+      else
+        dispatch(logoutFailed());
+      dispatch(requestEnd());
+      return json;
+    })
+      .catch(error => { console.log('request failed', error); })
+  }
+}
+
 export const loginSuccess = () => {
   return {
     type: LOGIN_SUCCESS
@@ -53,6 +81,18 @@ export const loginSuccess = () => {
 export const loginFailed = () => {
   return {
     type: LOGIN_FAILED
+  }
+}
+
+export const logoutSuccess = () => {
+  return {
+    type: LOGOUT_SUCCESS
+  }
+}
+
+export const logoutFailed = () => {
+  return {
+    type: LOGOUT_FAILED
   }
 }
 

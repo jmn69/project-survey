@@ -27,6 +27,24 @@
   color: white;
 }
 
+.spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner > div {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+
+  margin: 50px auto;
+}
+
+
 /** NEXT TRANSITION **/
 
 .next .slide-enter {

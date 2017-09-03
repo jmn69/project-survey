@@ -49,6 +49,11 @@ app.post("/authentication", users.authentication);
 
 app.get('/authenticate', users.authenticate);
 
+app.get('/logout', function(req, res){
+  req.logout();
+  res.json({ success: true, message: 'logout' })
+});
+
 // UNIVERSAL HMR + STATS HANDLING GOODNESS:
 
 if (DEV) {

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Switcher from './Switcher';
+import MenuBar from './MenuBar';
 
 class AdminArea extends React.Component {
     constructor(props) {
@@ -10,7 +11,10 @@ class AdminArea extends React.Component {
 
     render() {
         return (
-            <Switcher />
+            <div>
+                <MenuBar />
+                <Switcher />
+            </div>
         );
     }
 }

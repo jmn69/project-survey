@@ -35,10 +35,26 @@ describe('Actions app', () => {
         );
     });
 
-    it('loginSuccess', () => {
+    it('loginFailed', () => {
         expect(app.loginFailed()).toEqual(
             {
                 type: app.LOGIN_FAILED
+            }
+        );
+    });
+
+    it('logoutSuccess', () => {
+        expect(app.logoutSuccess()).toEqual(
+            {
+                type: app.LOGOUT_SUCCESS
+            }
+        );
+    });
+
+    it('logoutFailed', () => {
+        expect(app.logoutFailed()).toEqual(
+            {
+                type: app.LOGOUT_FAILED
             }
         );
     });
@@ -95,42 +111,78 @@ describe('Actions app', () => {
 
     });
 
-    
     describe('authenticate', () => {
-        
-                it('should be dispatched on successful request', () => {
-                    jest.spyOn(API, "authenticate").mockImplementation(async () => ({ authenticated: true }))
-                    const store = mockStore({});
-                    const expectedActions = [
-                        "REQUEST_BEGIN",
-                        "LOGIN_SUCCESS",
-                        "REQUEST_END"
-                    ]
-        
-                    return store.dispatch(app.authenticate())
-                        .then(() => {
-                            const actualActions = store.getActions().map(action => action.type);
-                            expect(actualActions).toEqual(expectedActions)
-                        });
+
+        it('should be dispatched on successful request', () => {
+            jest.spyOn(API, "authenticate").mockImplementation(async () => ({ authenticated: true }))
+            const store = mockStore({});
+            const expectedActions = [
+                "REQUEST_BEGIN",
+                "LOGIN_SUCCESS",
+                "REQUEST_END"
+            ]
+
+            return store.dispatch(app.authenticate())
+                .then(() => {
+                    const actualActions = store.getActions().map(action => action.type);
+                    expect(actualActions).toEqual(expectedActions)
                 });
-        
-                it('should be dispatched on failed request', () => {
-                    jest.spyOn(API, "authenticate").mockImplementation(async () => ({ authenticated: false }))
-                    const store = mockStore({});
-                    const expectedActions = [
-                        "REQUEST_BEGIN",
-                        "LOGIN_FAILED",
-                        "REQUEST_END"
-                    ]
-        
-                    return store.dispatch(app.authenticate())
-                        .then(() => {
-                            const actualActions = store.getActions().map(action => action.type);
-                            expect(actualActions).toEqual(expectedActions)
-                        });
+        });
+
+        it('should be dispatched on failed request', () => {
+            jest.spyOn(API, "authenticate").mockImplementation(async () => ({ authenticated: false }))
+            const store = mockStore({});
+            const expectedActions = [
+                "REQUEST_BEGIN",
+                "LOGIN_FAILED",
+                "REQUEST_END"
+            ]
+
+            return store.dispatch(app.authenticate())
+                .then(() => {
+                    const actualActions = store.getActions().map(action => action.type);
+                    expect(actualActions).toEqual(expectedActions)
                 });
-        
-            });
+        });
+
+    });
+
+    describe('logout', () => {
+
+        it('should be dispatched on successful request', () => {
+            jest.spyOn(API, "logout").mockImplementation(async () => ({ success: true }))
+            const store = mockStore({});
+            const expectedActions = [
+                "REQUEST_BEGIN",
+                "LOGOUT_SUCCESS",
+                "SIGNIN",
+                "REQUEST_END"
+            ]
+
+            return store.dispatch(app.signOut())
+                .then(() => {
+                    const actualActions = store.getActions().map(action => action.type);
+                    expect(actualActions).toEqual(expectedActions)
+                });
+        });
+
+        it('should be dispatched on failed request', () => {
+            jest.spyOn(API, "logout").mockImplementation(async () => ({ success: false }))
+            const store = mockStore({});
+            const expectedActions = [
+                "REQUEST_BEGIN",
+                "LOGOUT_FAILED",
+                "REQUEST_END"
+            ]
+
+            return store.dispatch(app.signOut())
+                .then(() => {
+                    const actualActions = store.getActions().map(action => action.type);
+                    expect(actualActions).toEqual(expectedActions)
+                });
+        });
+
+    });
 
 });
 

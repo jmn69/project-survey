@@ -44,6 +44,22 @@ describe('reducer app', () => {
         });
     });
 
+    it('should handle LOGOUT_SUCCESS', () => {
+        assertReducer({
+            from: {},
+            to: { loggedIn: false, currentUrl: null },
+            action: actionsApp.logoutSuccess()
+        });
+    });
+
+    it('should handle LOGOUT_FAILED', () => {
+        assertReducer({
+            from: {},
+            to: { loggedIn: true },
+            action: actionsApp.logoutFailed()
+        });
+    });
+
     it('should handle REQUEST_BEGIN', () => {
         assertReducer({
             from: {},

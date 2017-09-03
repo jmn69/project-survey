@@ -21,6 +21,17 @@ export default function app(state = initialState, action) {
         ...state,
         loggedIn: false
       };
+    case "LOGOUT_SUCCESS":
+      return {
+        ...state,
+        loggedIn: false,
+        currentUrl: null
+      };
+    case "LOGOUT_FAILED":
+      return {
+        ...state,
+        loggedIn: true
+      };
     case "REQUEST_BEGIN":
       return {
         ...state,

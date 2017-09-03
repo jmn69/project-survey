@@ -2,18 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { TransitionGroup, Transition } from 'transition-group';
 import UniversalComponent from './UniversalComponent';
-import '../css/Switcher.css';
+// import '../css/Switcher.css';
 
 const Switcher = ({ page, direction }) =>
-  <TransitionGroup
-    className={`switcher ${direction}`}
-    duration={500}
-    prefix='slide'
-  >
-    <Transition key={page}>
+  // <TransitionGroup
+  //   className={`switcher ${direction}`}
+  //   duration={500}
+  //   prefix='slide'
+  // >
+  //   <Transition key={page}>
       <UniversalComponent page={page} />
-    </Transition>
-  </TransitionGroup>
+  //   </Transition>
+  // </TransitionGroup>
 
 const mapState = ({ page, ...state }) => ({
   page

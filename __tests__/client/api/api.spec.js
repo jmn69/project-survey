@@ -24,22 +24,40 @@ describe('api', () => {
   });
 
   it('should call authenticate', async () => {
-    
-        const response = {
-          status: 200,
-          body: {
-            authenticate: true
-          }
-        }
-        fetchMock.mock(
-          `${server}/authenticate`,
-          response,
-          { method: 'GET' }
-        );
-    
-        const data = await API.authenticate();
-        expect(data).toEqual({ authenticate: true });
-      });
+
+    const response = {
+      status: 200,
+      body: {
+        authenticate: true
+      }
+    }
+    fetchMock.mock(
+      `${server}/authenticate`,
+      response,
+      { method: 'GET' }
+    );
+
+    const data = await API.authenticate();
+    expect(data).toEqual({ authenticate: true });
+  });
+
+  it('should call logout', async () => {
+
+    const response = {
+      status: 200,
+      body: {
+        success: true
+      }
+    }
+    fetchMock.mock(
+      `${server}/logout`,
+      response,
+      { method: 'GET' }
+    );
+
+    const data = await API.logout();
+    expect(data).toEqual({ success: true });
+  });
 
 });
 

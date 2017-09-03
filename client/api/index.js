@@ -6,7 +6,7 @@ const API = {
             method: "POST",
             credentials: "include",
             body: JSON.stringify(payload),
-            headers: { 'content-type': 'application/json' },
+            headers: { 'content-type': 'application/json' }
         })
             .then(res => { return res.json(); })
     },
@@ -15,7 +15,16 @@ const API = {
         return fetch(`${server}/authenticate`, {
             method: 'GET',
             credentials: "same-origin",
-            headers: { 'content-type': 'application/json' },
+            headers: { 'content-type': 'application/json' }
+        })
+            .then(res => { return res.json(); });
+    },
+
+    logout() {
+        return fetch(`${server}/logout`, {
+            method: 'GET',
+            credentials: "same-origin",
+            headers: { 'content-type': 'application/json' }
         })
             .then(res => { return res.json(); });
     }
