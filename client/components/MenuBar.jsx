@@ -8,11 +8,13 @@ import NavbarBrand from 'reactstrap/lib/NavbarBrand';
 import Nav from 'reactstrap/lib/Nav';
 import NavItem from 'reactstrap/lib/NavItem';
 import NavLink from 'reactstrap/lib/NavLink';
-import { goToPage, signOut } from '../actions';
+import NavLinkRedux from './NavLink';
+import { signOut } from '../actions';
 
 export class MenuBar extends React.Component {
     constructor(props) {
         super(props)
+        this.handleSignOutClick = this.handleSignOutClick.bind(this);
         this.state = {}
     }
 
@@ -33,44 +35,30 @@ export class MenuBar extends React.Component {
         );
     }
 
-    active(currentPath, path) {
-        return currentPath === path ? "#18BC9C" : "";
-    }
-
-    handleNavClick(page) {
-        this.props.goToPage(page);
-    }
-
     renderAdminBar() {
-        const { path, loggedIn } = this.props;
+        const { loggedIn } = this.props;
         return loggedIn
             ? <Nav id="adminBar" navbar>
                 <NavItem>
-                    <NavLink
-                        style={{ color: this.active(path, '/') }}
-                        onClick={this.handleNavClick('DASHBOARD')}
-                        href="#"
-                    >
-                        Dashboard
-            </NavLink>
+                    <NavLinkRedux
+                        pagePath='/'
+                        pageType='DASHBOARD'
+                        label='Dashboard'
+                    />
                 </NavItem>
                 <NavItem>
-                    <NavLink
-                        style={{ color: this.active(path, '/surveylist') }}
-                        onClick={this.handleNavClick('SURVEYLIST')}
-                        href="#"
-                    >
-                        SurveyList
-            </NavLink>
+                    <NavLinkRedux
+                        pagePath='/surveylist'
+                        pageType='SURVEYLIST'
+                        label='SurveyList'
+                    />
                 </NavItem>
                 <NavItem>
-                    <NavLink
-                        style={{ color: this.active(path, '/settings') }}
-                        onClick={this.handleNavClick('SETTINGS')}
-                        href="#"
-                    >
-                        Settings
-            </NavLink>
+                    <NavLinkRedux
+                        pagePath='/settings'
+                        pageType='SETTINGS'
+                        label='Settings'
+                    />
                 </NavItem>
             </Nav>
             : null;
@@ -83,12 +71,16 @@ export class MenuBar extends React.Component {
                 <NavLink
                     id='signout-link'
                     href="#"
-                    onClick={() => signOut()}
+                    onClick={this.handleSignOutClick}
                 >
                     Sign out
                 </NavLink>
             </NavItem>
             : null;
+    }
+
+    handleSignOutClick() {
+        this.props.signOut();
     }
 }
 
@@ -96,13 +88,11 @@ export class MenuBar extends React.Component {
 export const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
         {
-            goToPage: goToPage,
             signOut: signOut
         }, dispatch);
 }
 export const mapStateToProps = (state, ownProps) => {
     return {
-        path: state.location.pathname,
         loggedIn: state.app.loggedIn
     }
 }

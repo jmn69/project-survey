@@ -35,9 +35,7 @@ describe('MenuBar', () => {
     it('should render the admin bar', () => {
       const wrapper = shallow(<MenuBar />);
       wrapper.setProps({
-        path: "/",
-        loggedIn: true,
-        goToPage: () => { }
+        loggedIn: true
       });
       expect(wrapper.find('#adminBar')).toBePresent();
     });
@@ -45,9 +43,7 @@ describe('MenuBar', () => {
     it('should note render the admin bar', () => {
       const wrapper = shallow(<MenuBar />);
       wrapper.setProps({
-        path: "/",
-        loggedIn: false,
-        goToPage: () => { }
+        loggedIn: false
       });
       expect(wrapper.find('#adminBar')).not.toBePresent();
     });
@@ -56,8 +52,7 @@ describe('MenuBar', () => {
       const wrapper = shallow(<MenuBar />);
       wrapper.setProps({
         loggedIn: true,
-        signOut: () => { },
-        goToPage: () => { }
+        signOut: () => { }
       });
       
       expect(wrapper.find('#signout-link')).toBePresent();
@@ -67,21 +62,21 @@ describe('MenuBar', () => {
       const wrapper = shallow(<MenuBar />);
       wrapper.setProps({
         loggedIn: false,
-        signOut: () => { },
-        goToPage: () => { }
+        signOut: () => { }
       });
       
       expect(wrapper.find('#signout-link')).not.toBePresent();
     });
 
-    it('should fire goToPage on NavLink click', () => {
+    it('should dispatch signout on click', () => {
       const spy = jest.fn();
       const wrapper = shallow(<MenuBar />);
       wrapper.setProps({
-        goToPage: spy
+        loggedIn: true,
+        signOut: spy
       });
-      wrapper.instance().handleNavClick('DASHBOARD');
-      expect(spy).toHaveBeenCalledWith('DASHBOARD');
+      wrapper.instance().handleSignOutClick();
+      expect(spy).toHaveBeenCalled();
     });
 
   });
@@ -91,29 +86,15 @@ describe('MenuBar', () => {
       const state = {
         app: {
           loggedIn: true
-        },
-        location: {
-          pathname: "/"
         }
       };
 
       expect(mapStateToProps(state)).toEqual({
-        loggedIn: true,
-        path: "/"
+        loggedIn: true
       });
     });
 
     describe("mapDispatchToProps", function () {
-
-      it("goToPage", function () {
-
-        const { store, fn } = prepare("goToPage", {});
-        fn('DASHBOARD').then(() => {
-          expect(store.getActions().map(a => a.type)).toEqual([
-            "DASHBOARD"
-          ]);
-        });
-      });
 
       it("signOut", function () {
         const { store, fn } = prepare("signOut", {});
