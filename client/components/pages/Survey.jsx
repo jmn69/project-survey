@@ -34,18 +34,22 @@ export class Survey extends React.Component {
 
     render() {
         const { survey } = this.props;
-        const surveys = survey.questions.map(question => {
-            const componentName = getQuestionComponentNameByType(question.type);
-            return (
-                <Row key={question.id} className={`justify-content-center`}>
-                    <Col md="6">
-                        <UniversalComponent
-                            component={componentName}
-                        />
-                    </Col>
-                </Row>
-            );
-        });
+        let surveys = null;
+        if (survey && survey.question) {
+            surveys = questions.map(question => {
+                const componentName = getQuestionComponentNameByType(question.type);
+                return (
+                    <Row key={question.id} className={`justify-content-center`}>
+                        <Col md="6">
+                            <UniversalComponent
+                                component={componentName}
+                            />
+                        </Col>
+                    </Row>
+                );
+            });
+        }
+
         return (
             <Row className={`${styles.root} justify-content-center`}>
                 <Col xs="12" sm="10" md="8">

@@ -1,15 +1,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Settings from 'client/components/Settings.jsx';
+import SurveyList from 'client/components/pages/SurveyList.jsx';
 
-describe('Settings', () => {
+describe('SurveyList', () => {
 
   describe('UI', () => {
 
     it('should render', () => {
       const render = () => {
-        shallow(<Settings />);
+        shallow(<SurveyList />);
       };
       expect(render).not.toThrow();
     });

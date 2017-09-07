@@ -1,15 +1,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Dashboard from 'client/components/Dashboard.jsx';
+import UniversalComponent from 'client/components/pages/UniversalComponent.js';
 
-describe('Dashboard', () => {
+describe('UniversalComponent', () => {
 
   describe('UI', () => {
 
     it('should render', () => {
       const render = () => {
-        shallow(<Dashboard />);
+        shallow(<UniversalComponent />);
       };
       expect(render).not.toThrow();
     });

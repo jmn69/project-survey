@@ -6,7 +6,7 @@ import FormText from 'reactstrap/lib/FormText';
 
 import { server, port } from 'client/config';
 import API from 'client/api';
-import SigninConnected, { SignIn, mapStateToProps, mapDispatchToProps } from 'client/components/SignIn.jsx';
+import SigninConnected, { SignIn, mapStateToProps, mapDispatchToProps } from 'client/components/pages/SignIn.jsx';
 
 jest.spyOn(API, "authentication").mockImplementation(async () => ({ success: true }))
 

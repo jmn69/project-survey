@@ -1,15 +1,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import UniversalComponent from 'client/components/UniversalComponent.js';
+import Settings from 'client/components/pages/Settings.jsx';
 
-describe('UniversalComponent', () => {
+describe('Settings', () => {
 
   describe('UI', () => {
 
     it('should render', () => {
       const render = () => {
-        shallow(<UniversalComponent />);
+        shallow(<Settings />);
       };
       expect(render).not.toThrow();
     });
