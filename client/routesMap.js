@@ -14,5 +14,8 @@ export default {
   DASHBOARD: {
     path: '/',
     role: 'admin'
+  },
+  SURVEY: {
+    path: '/survey/:id'
   }
 };

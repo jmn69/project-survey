@@ -7,3 +7,13 @@ export const isAllowed = (type, state) => {
   if (!role) return true;
   return state.app.loggedIn;
 }
+
+export const getQuestionComponentNameByType = (type) => components[type];
+
+const components = {
+  RADIOSINGLE: 'RadioSingle',
+  RADIOMULTIPLE: 'RadioMultiple',
+  CHECKSINGLE: 'CheckSingle',
+  CHECKMULTIPLE: 'CheckMultiple',
+  INPUTSINGLE: 'InputSingle'
+};

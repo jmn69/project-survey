@@ -8,5 +8,6 @@ const components = {
   SETTINGS: 'Settings',
   SIGNIN: 'SignIn',
   SURVEYLIST: 'SurveyList',
+  SURVEY: 'Survey',
   [NOT_FOUND]: 'NotFound'
 };

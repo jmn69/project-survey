@@ -24,6 +24,7 @@ export default ({ clientStats }) => async (req, res, next) => {
 
   console.log('REQUESTED PATH:', req.path);
   console.log('CHUNK NAMES', chunkNames);
+  console.log('assetbychunkname', clientStats.assetsByChunkName);
 
   return res.send(
     `<!doctype html>

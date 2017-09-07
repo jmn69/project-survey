@@ -21,7 +21,7 @@ export class MenuBar extends React.Component {
     render() {
         return (
             <Navbar color="primary" inverse toggleable>
-                <NavbarBrand href="/">Surveys</NavbarBrand>
+                <NavbarBrand href="/">Surveasy</NavbarBrand>
                 {this.renderAdminBar()}
                 <Nav className="ml-auto" navbar>
                     {this.renderSignOut()}
