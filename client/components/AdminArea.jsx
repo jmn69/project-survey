@@ -4,7 +4,7 @@ import Row from 'reactstrap/lib/Row';
 import Col from 'reactstrap/lib/Col';
 import styles from '../css/Signin.css';
 
-import Switcher from './Switcher';
+import Switcher from './pages/Switcher';
 import MenuBar from './MenuBar';
 
 class AdminArea extends React.Component {

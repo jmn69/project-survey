@@ -1,9 +1,9 @@
 import React from 'react';
 import universal from 'react-universal-component';
-import { notFound } from '../css/Switcher.css';
+import { notFound } from '../../css/Switcher.css';
 import Row from 'reactstrap/lib/Row';
 import Col from 'reactstrap/lib/Col';
-import styles from '../css/Signin.css';
+import styles from '../../css/Signin.css';
 
 const loading = () => {
   return (

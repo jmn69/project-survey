@@ -5,8 +5,8 @@ import Container from 'reactstrap/lib/Container';
 import Row from 'reactstrap/lib/Row';
 import Col from 'reactstrap/lib/Col';
 
-import { getQuestionComponentNameByType } from '../utils';
-import styles from '../css/Survey.css';
+import { getQuestionComponentNameByType } from '../../utils';
+import styles from '../../css/Survey.css';
 
 const loading = () => {
     return (
@@ -19,7 +19,7 @@ const loading = () => {
 };
 
 const UniversalComponent = universal(
-    props => import(`./questions/${props.component}`),
+    props => import(`../questions/${props.component}`),
     {
         loading: loading,
         error: () => <div>PAGE NOT FOUND - 404</div>

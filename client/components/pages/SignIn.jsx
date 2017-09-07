@@ -16,8 +16,8 @@ import CardHeader from 'reactstrap/lib/CardHeader';
 import CardBlock from 'reactstrap/lib/CardBlock';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 
-import { authentication, goTo } from '../actions';
-import styles from '../css/Signin.css';
+import { authentication, goTo } from '../../actions';
+import styles from '../../css/Signin.css';
 
 export class SignIn extends React.Component {
     constructor(props) {
